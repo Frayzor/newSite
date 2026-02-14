@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Прости меня 💖</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #ffe6f0, #ffd6eb);
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    text-align: center;
+}
+
+.container {
+    background: white;
+    padding: 60px;
+    width: 500px;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    position: relative;
+}
+
+img {
+    width: 280px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+}
+
+h1 {
+    color: #ff3385;
+    font-size: 2.2rem;
+}
+
+.buttons {
+    margin-top: 30px;
+}
+
+button {
+    font-size: 20px;
+    padding: 15px 35px;
+    margin: 15px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#yesBtn {
+    background: #ff4d88;
+    color: white;
+}
+
+#noBtn {
+    background: #dddddd;
+}
+
+.hearts {
+    position: absolute;
+    font-size: 28px;
+    animation: float 3s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-400px); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="mainContent">
+    <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=600&q=100" alt="Милая мышка">
+
+    <h1>🥺💖Прости меня...🥺💖</h1>
+
+    <div class="buttons">
+        <button id="yesBtn">Ладно, прощаю 💕</button>
+        <button id="noBtn">Нет, не прощу 😤</button>
+    </div>
+</div>
+
+<script>
+let yesBtn = document.getElementById("yesBtn");
+let noBtn = document.getElementById("noBtn");
+
+let yesScale = 1;
+let noScale = 1;
+
+noBtn.addEventListener("click", function() {
+
+    // Увеличиваем кнопку "Прощаю"
+    yesScale += 0.15;
+    yesBtn.style.transform = "scale(" + yesScale + ")";
+
+    // Уменьшаем кнопку "Нет"
+    noScale -= 0.15;
+
+    if (noScale <= 0.2) {
+        noBtn.style.display = "none";
+    } else {
+        noBtn.style.transform = "scale(" + noScale + ")";
+    }
+});
+
+yesBtn.addEventListener("click", function() {
+    document.getElementById("mainContent").innerHTML =
+        "<h1>Спасибо, любимая 🥺💖</h1>" +
+        "<p style='font-size:22px;'>Я правда тебя очень люблю и больше так не буду 💕</p>";
+
+    setInterval(createHeart, 200);
+});
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("hearts");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.top = window.innerHeight + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 3000);
+}
+</script>
+
+</body>
+</html>
+
